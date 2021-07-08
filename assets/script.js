@@ -1,4 +1,6 @@
 const APIKEY = "ebbf326ee70a2c54d1a94e133f651689";
+counter = 0;
+
 
 var searchBtn = document.getElementById("btn");
 var zipInput = document.getElementById("zipinput");
@@ -14,8 +16,8 @@ var dayThree = document.getElementById("day3");
 var dayFour = document.getElementById("day4");
 var dayFive = document.getElementById("day5");
 
-var cityOne = document.getElementById(city1);
-var cityTwo = document.get ElementbyId("city2");
+var cityOne = document.getElementById("city1");
+var cityTwo = document.getElementbyId("city2");
 var cityThree = document.getElementById("city3");
 var cityFour = document.getElementById("city4");
 var cityFive = document.getElementById("city5");
@@ -35,3 +37,8 @@ var searchFunction = function() {
 };
 
 localStorage.setItem("")
+
+var saveSearches = function(zipCode) {
+    localStorage.setItem(city1, zipCode);
+    
+if }
