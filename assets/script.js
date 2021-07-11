@@ -22,6 +22,8 @@ var cityThree = document.getElementById("city3");
 var cityFour = document.getElementById("city4");
 var cityFive = document.getElementById("city5");
 
+var cities = [cityOne, cityTwo, cityThree, cityFour, cityFive]
+
 
 var searchFunction = function() {
     let zipCode = zipInput.value;
@@ -38,7 +40,13 @@ var searchFunction = function() {
 
 localStorage.setItem("")
 
-var saveSearches = function(zipCode) {
-    localStorage.setItem(city1, zipCode);
-    
-if }
+var saveSearches = function(zip){
+    localStorage.setItem(city1, zip)
+    cities[counter].innerHTML = zip
+    if (counter < 4 ){
+        counter++
+    }
+    else{
+        counter = 0
+    }
+};
