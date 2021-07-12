@@ -1,5 +1,4 @@
 const APIKEY = "ebbf326ee70a2c54d1a94e133f651689";
-counter = 0;
 
 function Failed5Day(results) {
 	console.log("Failed to retrieve 5 day");
@@ -37,22 +36,53 @@ function FailedCurrent(results) {
 	$("#searchGroup").effect("shake", {duration: 5000, distance: 20, times: 10});
 }
 
+function getIconInsert(type) {
+	switch (type) {
+		case "Clear":
+			return `wi wi-day-sunny`;
+
+		case "Clouds":
+			return `wi wi-day-cloudy`
+
+		case "Rain":
+			return `wi wi-day-rain`
+
+		default:
+			return `wi wi-na`;
+	}
+}
+
+function KtoF(K) {
+	return (9 / 5) * (K - 273) + 32;
+}
+
+function MStoMPH(ms) {
+	return ms * 2.236936;
+}
+
+function RetrievedCurrent(results) {
+	console.log(results);
+	$("#txtCity").removeClass("is-invalid");
+	var lat = results.coord.lat;
+	var lon = results.coord.lon;
+	var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKEY}`;
+	$.ajax(url).done(Retrieved5Day).fail(Failed5Day);
+	var dt = DateTime.local();
+	$("#cardHeader").html(`${results.name} (${dt.month}-${dt.day}-${dt.year}) <i class="${getIconInsert(results.weather[0].main)}"></i>`);
+	$("#item-Temp").html(`Temperature: ${KtoF(results.main.temp).toFixed(2)} &#176;F`);
+	$("#item-Humidty").html(`Humidty: ${results.main.humidity}%`);
+	$("#item-Wind").html(`Wind Speed: ${MStoMPH(results.wind.speed).toFixed(2)} MPH`);
+
+	if(AddHistory){
+		addToHistory(results.name);
+		AddHistory = false;	
+	}
+
+	localStorage.setItem("LastSearched", results.name);
+}
 
 
 
-//localStorage.setItem("")
 
-//var saveSearches = function (zip) {
-//  localStorage.setItem(city1, zip)
- //   cities[counter].innerHTML = zip
-  //  if (counter < 4) {
-  //      counter++
-  //  }
-   // else {
-     //   counter = 0
-   // }
-//};
-
-//searchBtn.addEventListener("click", searchFunction);
 
 
