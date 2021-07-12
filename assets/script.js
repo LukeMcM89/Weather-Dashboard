@@ -1,58 +1,58 @@
 const APIKEY = "ebbf326ee70a2c54d1a94e133f651689";
 counter = 0;
 
+function Failed5Day(results) {
+	console.log("Failed to retrieve 5 day");
+}
 
-var searchBtn = document.getElementById("btn");
-var zipInput = document.getElementById("zipinput");
+function Retrieved5Day(results) {
+	console.log(results);
+	var uvi = results.current.uvi;
+	$("#uvIndex").attr("class", "");
+	if(uvi < 2){
+		$("#uvIndex").addClass("uvIndex uvGreen");
+	}else if(uvi < 8){
+		$("#uvIndex").addClass("uvIndex uvYellow");
+	}else{
+		$("#uvIndex").addClass("uvIndex uvRed");
+	}
+	$("#uvIndex").text(uvi);
 
-var currentTemp = document.getElementById("temp");
-var currentWind = document.getElementById("wind");
-var currentHumid = document.getElementById("humidity");
-var currentUv = document.getElementById("uvindex");
+	for(var i=1; i<6; i++){
+		$(`#day-${i}-Icon`).attr("class", "");
+		var classes = getIconInsert(results.daily[i-1].weather[0].main);
+		$(`#day-${i}-Icon`).addClass(classes);
 
-var dayOne = document.getElementById("day1");
-var dayTwo = document.getElementById("day2");
-var dayThree = document.getElementById("day3");
-var dayFour = document.getElementById("day4");
-var dayFive = document.getElementById("day5");
+		$(`#day-${i}-Temp`).html(`Temp: ${KtoF(results.daily[i-1].temp.day).toFixed(2)}&#176;F`);
+		$(`#day-${i}-Humid`).html(`Humidity: ${results.daily[i-1].humidity}%`);
+		
 
-var cityOne = document.getElementById("city1");
-var cityTwo = document.getElementbyId("city2");
-var cityThree = document.getElementById("city3");
-var cityFour = document.getElementById("city4");
-var cityFive = document.getElementById("city5");
-
-var cities = [cityOne, cityTwo, cityThree, cityFour, cityFive]
-
-
-var searchFunction = function () {
-    let zipCode = zipInput.value;
-    console.log(zipCode);
-    let apiAddress = 'https://api.openweathermap.org/data/2.5/forecast?q=”+ zipCode + “&appid=” + APIKey';
-    console.log(apiAddress);
-    fetch(apiAddress)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data)
-        })
-};
-
-localStorage.setItem("")
-
-var saveSearches = function (zip) {
-    localStorage.setItem(city1, zip)
-    cities[counter].innerHTML = zip
-    if (counter < 4) {
-        counter++
-    }
-    else {
-        counter = 0
-    }
-};
-
-searchBtn.addEventListener("click", searchFunction);
-
+	}
 
 }
+
+function FailedCurrent(results) {
+	console.log("Failed to find current");
+	$("#txtCity").addClass("is-invalid");
+	$("#searchGroup").effect("shake", {duration: 5000, distance: 20, times: 10});
+}
+
+
+
+
+//localStorage.setItem("")
+
+//var saveSearches = function (zip) {
+//  localStorage.setItem(city1, zip)
+ //   cities[counter].innerHTML = zip
+  //  if (counter < 4) {
+  //      counter++
+  //  }
+   // else {
+     //   counter = 0
+   // }
+//};
+
+//searchBtn.addEventListener("click", searchFunction);
+
+
