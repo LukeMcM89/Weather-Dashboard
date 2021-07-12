@@ -16,3 +16,5 @@ I utitlized https://erikflowers.github.io/weather-icons/ for the icon pallete.
 Moving forward I'd like to get that last bit working, as all other parameters for the coursework are fullfilled. 
 
 Thank you for your time!
+
+<img width="1292" alt="Weather_Screenshot" src="https://user-images.githubusercontent.com/80003989/125362332-b76f4e00-e33c-11eb-9557-13a6ab239f0f.png">
