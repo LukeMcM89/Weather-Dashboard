@@ -16,4 +16,7 @@ This coursework proved to be challenging and took me quite a long time. I scrapp
 
 Thank you for your time!
 
-<img width="1292" alt="Weather_Screenshot" src="https://user-images.githubusercontent.com/80003989/125362332-b76f4e00-e33c-11eb-9557-13a6ab239f0f.png">
+<img width="1248" alt="Dash_Screenshot" src="https://user-images.githubusercontent.com/80003989/125363509-ba6b3e00-e33e-11eb-9a92-edf442d994f5.png">
+
+
+
