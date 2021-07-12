@@ -25,28 +25,34 @@ var cityFive = document.getElementById("city5");
 var cities = [cityOne, cityTwo, cityThree, cityFour, cityFive]
 
 
-var searchFunction = function() {
+var searchFunction = function () {
     let zipCode = zipInput.value;
     console.log(zipCode);
     let apiAddress = 'https://api.openweathermap.org/data/2.5/forecast?q=”+ zipCode + “&appid=” + APIKey';
     console.log(apiAddress);
     fetch(apiAddress)
         .then(function (response) {
-        return response.json();
+            return response.json();
         })
         .then(function (data) {
-        console.log(data)})
+            console.log(data)
+        })
 };
 
 localStorage.setItem("")
 
-var saveSearches = function(zip){
+var saveSearches = function (zip) {
     localStorage.setItem(city1, zip)
     cities[counter].innerHTML = zip
-    if (counter < 4 ){
+    if (counter < 4) {
         counter++
     }
-    else{
+    else {
         counter = 0
     }
 };
+
+searchBtn.addEventListener("click", searchFunction);
+
+
+}
