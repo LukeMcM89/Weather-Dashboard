@@ -1,4 +1,7 @@
-const APIKEY = "ebbf326ee70a2c54d1a94e133f651689";
+const APIKEY = "a1c4fbe6a0a3ec3f47e55f916e0ddfe4";
+var DateTime = luxon.DateTime;
+var AddHistory = false;
+var SHistory = [];
 
 function Failed5Day(results) {
 	console.log("Failed to retrieve 5 day");
@@ -103,7 +106,7 @@ function SearchCity(ev) {
 
 }
 
-function PullfromHistory(ev) {
+function PullfromHistory(ev){
 	ev.preventDefault();
 	AddHistory = false;
 	var city = 	$(this).text();
@@ -135,3 +138,22 @@ function loadHistory(){
 	}
 }
 
+$(document).ready(function () {
+
+	$("#btnSearch").click(SearchCity);
+
+	for (var i = 1; i < 6; i++) {
+		$(`#day-${i}-header`).text(DateTime.local().plus({ days: i }).toLocaleString());
+	}
+
+	var city = localStorage.getItem("LastSearched");
+	if(city === null){
+		city="Richmond";
+	}
+
+	var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`;
+	$.ajax(url).done(RetrievedCurrent).fail(FailedCurrent);
+
+	loadHistory();
+
+});
