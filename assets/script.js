@@ -1,4 +1,4 @@
-const APIKEY = "a1c4fbe6a0a3ec3f47e55f916e0ddfe4";
+const APIKEY = "ebbf326ee70a2c54d1a94e133f651689";
 var DateTime = luxon.DateTime;
 var AddHistory = false;
 var SHistory = [];
