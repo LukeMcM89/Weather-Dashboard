@@ -81,8 +81,57 @@ function RetrievedCurrent(results) {
 	localStorage.setItem("LastSearched", results.name);
 }
 
+function addToHistory(name){
+	var listItem = $("<li></li>");
+	listItem.addClass("btn btn-primary location-btn");
+	listItem.text(name);
+	listItem.click(PullfromHistory);
+	$("#HistoryList").append(listItem);
+	SHistory[SHistory.length] = name;
+	saveHistory();
+}
 
 
+function SearchCity(ev) {
+	ev.preventDefault();
+	AddHistory = true;
+	var city = $("#txtCity").val().trim();
+	if (!(city === "")) {
+		var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`;
+		$.ajax(url).done(RetrievedCurrent).fail(FailedCurrent);
+	}
 
+}
 
+function PullfromHistory(ev) {
+	ev.preventDefault();
+	AddHistory = false;
+	var city = 	$(this).text();
+	if (!(city === "")) {
+		var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`;
+		$.ajax(url).done(RetrievedCurrent).fail(FailedCurrent);
+	}
+}
+
+function saveHistory(){
+	var histString = JSON.stringify(SHistory);
+	localStorage.setItem("SearchHistory", histString);
+}
+
+function loadHistory(){
+	var hist = localStorage.getItem("SearchHistory")
+	if(hist == null){
+		return;
+	}
+	SHistory = JSON.parse(hist);
+
+	$("#HistoryList").empty();
+	for(var i = 0; i < SHistory.length; i++){
+		var listItem = $("<li></li>");
+		listItem.addClass("btn btn-primary location-btn");
+		listItem.text(SHistory[i]);
+		listItem.click(PullfromHistory);
+		$("#HistoryList").append(listItem);
+	}
+}
 
